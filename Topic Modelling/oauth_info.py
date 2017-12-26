@@ -1,7 +1,7 @@
 # -*- coding: latin-1 -*-
-
-CONSUMER_KEY = 'KHgpV3volIFaycetkEBxNZYi4'
-CONSUMER_SECRET = 'UZL66QagNpi8NGCAvDM4VuebupAGCO03n3HvmMBHlwFufjFRCV'
-ACCESS_TOKEN = '2898471924-4JVV08JJjVLQIFVu1ztDVkfy8urDnYVUNytLQud'
-ACCESS_TOKEN_SECRET = 'hBEEDsYPbTyI2AxOxvgT6sEVA1sK9G5lDZWcflPdUg3AB'
-USER_NAME = 'NASA'
+# fill these with your twitter app access tokens
+CONSUMER_KEY = 'your consumer key'
+CONSUMER_SECRET = 'your consumer secret'
+ACCESS_TOKEN = 'your access token'
+ACCESS_TOKEN_SECRET = 'your access token secret'
+USER_NAME = 'your username'

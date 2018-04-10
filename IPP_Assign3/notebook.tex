@@ -1,0 +1,1907 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{KDD challenge}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{train} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}table}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{orange\PYZus{}small\PYZus{}train.data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{train}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}    Var1  Var2  Var3  Var4  Var5    Var6  Var7  Var8  Var9  Var10   {\ldots}    \textbackslash{}
+        0   NaN   NaN   NaN   NaN   NaN  1526.0   7.0   NaN   NaN    NaN   {\ldots}     
+        1   NaN   NaN   NaN   NaN   NaN   525.0   0.0   NaN   NaN    NaN   {\ldots}     
+        2   NaN   NaN   NaN   NaN   NaN  5236.0   7.0   NaN   NaN    NaN   {\ldots}     
+        3   NaN   NaN   NaN   NaN   NaN     NaN   0.0   NaN   NaN    NaN   {\ldots}     
+        4   NaN   NaN   NaN   NaN   NaN  1029.0   7.0   NaN   NaN    NaN   {\ldots}     
+        
+            Var221   Var222      Var223  Var224  Var225  Var226   Var227  \textbackslash{}
+        0     oslk  fXVEsaq  jySVZNlOJy     NaN     NaN    xb3V     RAYp   
+        1     oslk  2Kb5FSF  LM8l689qOp     NaN     NaN    fKCe     RAYp   
+        2  Al6ZaUT  NKv4yOc  jySVZNlOJy     NaN    kG3k    Qu4f  02N6s8f   
+        3     oslk  CE7uk3u  LM8l689qOp     NaN     NaN    FSa2     RAYp   
+        4     oslk  1J2cvxe  LM8l689qOp     NaN    kG3k    FSa2     RAYp   
+        
+                  Var228  Var229  Var230  
+        0  F2FyR07IdsN7I     NaN     NaN  
+        1  F2FyR07IdsN7I     NaN     NaN  
+        2  ib5G6X1eUxUn6    am7c     NaN  
+        3  F2FyR07IdsN7I     NaN     NaN  
+        4  F2FyR07IdsN7I    mj86     NaN  
+        
+        [5 rows x 230 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{train}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} (50000, 230)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{train}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:}              Var1         Var2           Var3         Var4          Var5  \textbackslash{}
+        count  702.000000  1241.000000    1240.000000  1579.000000  1.487000e+03   
+        mean    11.487179     0.004029     425.298387     0.125396  2.387933e+05   
+        std     40.709951     0.141933    4270.193518     1.275481  6.441259e+05   
+        min      0.000000     0.000000       0.000000     0.000000  0.000000e+00   
+        25\%      0.000000     0.000000       0.000000     0.000000  0.000000e+00   
+        50\%      0.000000     0.000000       0.000000     0.000000  0.000000e+00   
+        75\%     16.000000     0.000000       0.000000     0.000000  1.187425e+05   
+        max    680.000000     5.000000  130668.000000    27.000000  6.048550e+06   
+        
+                        Var6          Var7  Var8         Var9         Var10   {\ldots}    \textbackslash{}
+        count   44471.000000  44461.000000   0.0   702.000000  1.487000e+03   {\ldots}     
+        mean     1326.437116      6.809496   NaN    48.145299  3.926057e+05   {\ldots}     
+        std      2685.693668      6.326053   NaN   154.777855  9.280896e+05   {\ldots}     
+        min         0.000000      0.000000   NaN     0.000000  0.000000e+00   {\ldots}     
+        25\%       518.000000      0.000000   NaN     4.000000  0.000000e+00   {\ldots}     
+        50\%       861.000000      7.000000   NaN    20.000000  0.000000e+00   {\ldots}     
+        75\%      1428.000000      7.000000   NaN    46.000000  2.628630e+05   {\ldots}     
+        max    131761.000000    140.000000   NaN  2300.000000  1.232559e+07   {\ldots}     
+        
+                     Var183       Var184  Var185      Var186     Var187       Var188  \textbackslash{}
+        count  1.241000e+03  1241.000000     0.0  702.000000  702.00000  1241.000000   
+        mean   7.777380e+04     8.460919     NaN    3.299145   16.54416   167.368477   
+        std    2.016188e+05    46.973777     NaN    8.781967   60.22303   113.980072   
+        min    0.000000e+00     0.000000     NaN    0.000000    0.00000    -6.420000   
+        25\%    0.000000e+00     0.000000     NaN    0.000000    0.00000    19.380000   
+        50\%    0.000000e+00     0.000000     NaN    0.000000    4.00000   197.640000   
+        75\%    4.881000e+04     8.000000     NaN    6.000000   14.00000   252.960000   
+        max    3.048400e+06  1200.000000     NaN  102.000000  910.00000   628.620000   
+        
+                     Var189         Var190  Var209  Var230  
+        count  21022.000000     333.000000     0.0     0.0  
+        mean     270.142137   22007.045192     NaN     NaN  
+        std       86.707692   29085.146490     NaN     NaN  
+        min        6.000000       0.000000     NaN     NaN  
+        25\%      204.000000    2732.670000     NaN     NaN  
+        50\%      270.000000   12668.940000     NaN     NaN  
+        75\%      330.000000   29396.340000     NaN     NaN  
+        max      642.000000  230427.000000     NaN     NaN  
+        
+        [8 rows x 192 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{appetency} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}table}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{appetency.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{header} \PY{o}{=} \PY{k+kc}{None}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{}appetency.head()}
+        \PY{n}{appetency}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:}          0
+        0     -1.0
+        1     -1.0
+        2     -1.0
+        3     -1.0
+        4     -1.0
+        5     -1.0
+        6     -1.0
+        7     -1.0
+        8     -1.0
+        9     -1.0
+        10    -1.0
+        11    -1.0
+        12    -1.0
+        13    -1.0
+        14    -1.0
+        15    -1.0
+        16    -1.0
+        17    -1.0
+        18    -1.0
+        19    -1.0
+        20    -1.0
+        21    -1.0
+        22    -1.0
+        23    -1.0
+        24    -1.0
+        25    -1.0
+        26    -1.0
+        27    -1.0
+        28    -1.0
+        29    -1.0
+        {\ldots}    {\ldots}
+        49970 -1.0
+        49971  1.0
+        49972  1.0
+        49973 -1.0
+        49974 -1.0
+        49975 -1.0
+        49976 -1.0
+        49977 -1.0
+        49978 -1.0
+        49979 -1.0
+        49980 -1.0
+        49981 -1.0
+        49982 -1.0
+        49983 -1.0
+        49984 -1.0
+        49985 -1.0
+        49986 -1.0
+        49987 -1.0
+        49988 -1.0
+        49989 -1.0
+        49990 -1.0
+        49991 -1.0
+        49992 -1.0
+        49993 -1.0
+        49994 -1.0
+        49995  1.0
+        49996  1.0
+        49997 -1.0
+        49998 -1.0
+        49999 -1.0
+        
+        [50000 rows x 1 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{categoricals} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{train}\PY{o}{.}\PY{n}{dtypes} \PY{o}{==} \PY{n+nb}{object}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{categoricals}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} Var191    48917
+        Var192      369
+        Var193        0
+        Var194    37216
+        Var195        0
+        Var196        0
+        Var197      143
+        Var198        0
+        Var199        4
+        Var200    25408
+        Var201    37217
+        Var202        1
+        Var203      143
+        Var204        0
+        Var205     1934
+        Var206     5529
+        Var207        0
+        Var208      143
+        Var210        0
+        Var211        0
+        Var212        0
+        Var213    48871
+        Var214    25408
+        Var215    49306
+        Var216        0
+        Var217      703
+        Var218      703
+        Var219     5211
+        Var220        0
+        Var221        0
+        Var222        0
+        Var223     5211
+        Var224    49180
+        Var225    26144
+        Var226        0
+        Var227        0
+        Var228        0
+        Var229    28432
+        dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{cat\PYZus{}series} \PY{o}{=} \PY{n}{categoricals}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{25000}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{drop\PYZus{}indices} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{index} \PY{o+ow}{in} \PY{n}{cat\PYZus{}series}\PY{o}{.}\PY{n}{index}\PY{p}{:}
+             \PY{k}{if} \PY{n}{cat\PYZus{}series}\PY{p}{[}\PY{n}{index}\PY{p}{]} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+                 \PY{n}{drop\PYZus{}indices}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{index}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{drop\PYZus{}indices} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{drop\PYZus{}indices}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{drop\PYZus{}indices}\PY{p}{)}
+         \PY{n}{train} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns} \PY{o}{=} \PY{n}{drop\PYZus{}indices}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Var191', 'Var194', 'Var200', 'Var201', 'Var213', 'Var214', 'Var215', 'Var224', 'Var225', 'Var229']
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{train}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 50000 entries, 0 to 49999
+Columns: 220 entries, Var1 to Var230
+dtypes: float64(191), int64(1), object(28)
+memory usage: 83.9+ MB
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{k}{for} \PY{n}{column} \PY{o+ow}{in} \PY{n}{train}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}print(pd.isnull(train[column]).sum())}
+             \PY{k}{if} \PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{10000}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{train}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{column}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{}train.dropna(how = \PYZsq{}all\PYZsq{}, inplace = True)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{train}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 50000 entries, 0 to 49999
+Data columns (total 66 columns):
+Var6      44471 non-null float64
+Var7      44461 non-null float64
+Var13     44461 non-null float64
+Var21     44471 non-null float64
+Var22     44991 non-null float64
+Var24     42770 non-null float64
+Var25     44991 non-null float64
+Var28     44989 non-null float64
+Var35     44991 non-null float64
+Var38     44991 non-null float64
+Var44     44991 non-null float64
+Var57     50000 non-null float64
+Var65     44461 non-null float64
+Var73     50000 non-null int64
+Var74     44461 non-null float64
+Var76     44991 non-null float64
+Var78     44991 non-null float64
+Var81     44471 non-null float64
+Var83     44991 non-null float64
+Var85     44991 non-null float64
+Var109    42770 non-null float64
+Var112    44991 non-null float64
+Var113    50000 non-null float64
+Var119    44471 non-null float64
+Var123    44991 non-null float64
+Var125    44461 non-null float64
+Var132    44991 non-null float64
+Var133    44991 non-null float64
+Var134    44991 non-null float64
+Var140    44461 non-null float64
+Var143    44991 non-null float64
+Var144    44471 non-null float64
+Var149    42770 non-null float64
+Var153    44991 non-null float64
+Var160    44991 non-null float64
+Var163    44991 non-null float64
+Var173    44991 non-null float64
+Var181    44991 non-null float64
+Var192    49631 non-null object
+Var193    50000 non-null object
+Var195    50000 non-null object
+Var196    50000 non-null object
+Var197    49857 non-null object
+Var198    50000 non-null object
+Var199    49996 non-null object
+Var202    49999 non-null object
+Var203    49857 non-null object
+Var204    50000 non-null object
+Var205    48066 non-null object
+Var206    44471 non-null object
+Var207    50000 non-null object
+Var208    49857 non-null object
+Var210    50000 non-null object
+Var211    50000 non-null object
+Var212    50000 non-null object
+Var216    50000 non-null object
+Var217    49297 non-null object
+Var218    49297 non-null object
+Var219    44789 non-null object
+Var220    50000 non-null object
+Var221    50000 non-null object
+Var222    50000 non-null object
+Var223    44789 non-null object
+Var226    50000 non-null object
+Var227    50000 non-null object
+Var228    50000 non-null object
+dtypes: float64(37), int64(1), object(28)
+memory usage: 25.2+ MB
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{train}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:}      Var6  Var7   Var13   Var21   Var22  Var24  Var25   Var28  Var35  \textbackslash{}
+         0  1526.0   7.0   184.0   464.0   580.0   14.0  128.0  166.56    0.0   
+         1   525.0   0.0     0.0   168.0   210.0    2.0   24.0  353.52    0.0   
+         2  5236.0   7.0   904.0  1212.0  1515.0   26.0  816.0  220.08    0.0   
+         3     NaN   0.0     0.0     NaN     0.0    NaN    0.0   22.08    0.0   
+         4  1029.0   7.0  3216.0    64.0    80.0    4.0   64.0  200.00    0.0   
+         
+                Var38      {\ldots}        Var217  Var218  Var219   Var220   Var221  \textbackslash{}
+         0     3570.0      {\ldots}          sH5Z    cJvF    FzaX  1YVfGrO     oslk   
+         1  4764966.0      {\ldots}           NaN     NaN    FzaX  0AJo2f2     oslk   
+         2  5883894.0      {\ldots}          bHR7    UYBR    FzaX  JFM1BiF  Al6ZaUT   
+         3        0.0      {\ldots}          eKej    UYBR    FzaX  L91KIiz     oslk   
+         4        0.0      {\ldots}          H3p7    UYBR    FzaX  OrnLfvc     oslk   
+         
+             Var222      Var223  Var226   Var227         Var228  
+         0  fXVEsaq  jySVZNlOJy    xb3V     RAYp  F2FyR07IdsN7I  
+         1  2Kb5FSF  LM8l689qOp    fKCe     RAYp  F2FyR07IdsN7I  
+         2  NKv4yOc  jySVZNlOJy    Qu4f  02N6s8f  ib5G6X1eUxUn6  
+         3  CE7uk3u  LM8l689qOp    FSa2     RAYp  F2FyR07IdsN7I  
+         4  1J2cvxe  LM8l689qOp    FSa2     RAYp  F2FyR07IdsN7I  
+         
+         [5 rows x 66 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{}train.dtypes}
+         \PY{n}{category\PYZus{}columns} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{select\PYZus{}dtypes}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{object}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{category\PYZus{}columns}\PY{p}{)}
+         \PY{k}{for} \PY{n}{column} \PY{o+ow}{in} \PY{n}{category\PYZus{}columns}\PY{p}{:}
+             \PY{n}{train}\PY{p}{[}\PY{n}{column}\PY{p}{]} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{category}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Var192', 'Var193', 'Var195', 'Var196', 'Var197', 'Var198', 'Var199', 'Var202', 'Var203', 'Var204', 'Var205', 'Var206', 'Var207', 'Var208', 'Var210', 'Var211', 'Var212', 'Var216', 'Var217', 'Var218', 'Var219', 'Var220', 'Var221', 'Var222', 'Var223', 'Var226', 'Var227', 'Var228']
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{train}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 50000 entries, 0 to 49999
+Data columns (total 66 columns):
+Var6      44471 non-null float64
+Var7      44461 non-null float64
+Var13     44461 non-null float64
+Var21     44471 non-null float64
+Var22     44991 non-null float64
+Var24     42770 non-null float64
+Var25     44991 non-null float64
+Var28     44989 non-null float64
+Var35     44991 non-null float64
+Var38     44991 non-null float64
+Var44     44991 non-null float64
+Var57     50000 non-null float64
+Var65     44461 non-null float64
+Var73     50000 non-null int64
+Var74     44461 non-null float64
+Var76     44991 non-null float64
+Var78     44991 non-null float64
+Var81     44471 non-null float64
+Var83     44991 non-null float64
+Var85     44991 non-null float64
+Var109    42770 non-null float64
+Var112    44991 non-null float64
+Var113    50000 non-null float64
+Var119    44471 non-null float64
+Var123    44991 non-null float64
+Var125    44461 non-null float64
+Var132    44991 non-null float64
+Var133    44991 non-null float64
+Var134    44991 non-null float64
+Var140    44461 non-null float64
+Var143    44991 non-null float64
+Var144    44471 non-null float64
+Var149    42770 non-null float64
+Var153    44991 non-null float64
+Var160    44991 non-null float64
+Var163    44991 non-null float64
+Var173    44991 non-null float64
+Var181    44991 non-null float64
+Var192    49631 non-null category
+Var193    50000 non-null category
+Var195    50000 non-null category
+Var196    50000 non-null category
+Var197    49857 non-null category
+Var198    50000 non-null category
+Var199    49996 non-null category
+Var202    49999 non-null category
+Var203    49857 non-null category
+Var204    50000 non-null category
+Var205    48066 non-null category
+Var206    44471 non-null category
+Var207    50000 non-null category
+Var208    49857 non-null category
+Var210    50000 non-null category
+Var211    50000 non-null category
+Var212    50000 non-null category
+Var216    50000 non-null category
+Var217    49297 non-null category
+Var218    49297 non-null category
+Var219    44789 non-null category
+Var220    50000 non-null category
+Var221    50000 non-null category
+Var222    50000 non-null category
+Var223    44789 non-null category
+Var226    50000 non-null category
+Var227    50000 non-null category
+Var228    50000 non-null category
+dtypes: category(28), float64(37), int64(1)
+memory usage: 18.1 MB
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{train}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:}                 Var6          Var7          Var13         Var21         Var22  \textbackslash{}
+         count   44471.000000  44461.000000   44461.000000  44471.000000  44991.000000   
+         mean     1326.437116      6.809496    1249.688401    234.518225    290.245382   
+         std      2685.693668      6.326053    2794.954874    565.560147    704.489990   
+         min         0.000000      0.000000       0.000000      0.000000      0.000000   
+         25\%       518.000000      0.000000       0.000000    112.000000    135.000000   
+         50\%       861.000000      7.000000     232.000000    144.000000    180.000000   
+         75\%      1428.000000      7.000000    1604.000000    228.000000    285.000000   
+         max    131761.000000    140.000000  197872.000000  36272.000000  45340.000000   
+         
+                       Var24         Var25         Var28         Var35         Var38  \textbackslash{}
+         count  42770.000000  44991.000000  44989.000000  44991.000000  4.499100e+04   
+         mean       4.507926     96.827010    224.507669      0.716810  2.579107e+06   
+         std        9.928819    214.318283     98.520240      2.996007  3.010076e+06   
+         min        0.000000      0.000000    -66.880000      0.000000  0.000000e+00   
+         25\%        0.000000     16.000000    166.560000      0.000000  7.794000e+03   
+         50\%        2.000000     48.000000    220.080000      0.000000  1.290246e+06   
+         75\%        6.000000    112.000000    266.400000      0.000000  4.570944e+06   
+         max      494.000000  13168.000000   5158.560000    110.000000  1.884690e+07   
+         
+                    {\ldots}             Var134         Var140        Var143        Var144  \textbackslash{}
+         count      {\ldots}       4.499100e+04   44461.000000  44991.000000  44471.000000   
+         mean       {\ldots}       4.373404e+05    1381.259643      0.058012     11.727665   
+         std        {\ldots}       6.043415e+05    3990.510522      0.643061     11.720288   
+         min        {\ldots}       0.000000e+00       0.000000      0.000000      0.000000   
+         25\%        {\ldots}       2.980800e+04       0.000000      0.000000      0.000000   
+         50\%        {\ldots}       2.089280e+05     220.000000      0.000000      9.000000   
+         75\%        {\ldots}       6.148840e+05    1350.000000      0.000000     18.000000   
+         max        {\ldots}       5.735340e+06  520545.000000     18.000000     81.000000   
+         
+                      Var149        Var153        Var160        Var163        Var173  \textbackslash{}
+         count  4.277000e+04  4.499100e+04  44991.000000  4.499100e+04  44991.000000   
+         mean   2.949208e+05  6.181967e+06     38.803005  4.860780e+05      0.006846   
+         std    6.568946e+05  4.348926e+06     99.497149  8.488638e+05      0.132503   
+         min    0.000000e+00  0.000000e+00      0.000000  0.000000e+00      0.000000   
+         25\%    0.000000e+00  1.232346e+06     10.000000  0.000000e+00      0.000000   
+         50\%    5.189800e+04  8.131560e+06     22.000000  1.346220e+05      0.000000   
+         75\%    4.121128e+05  1.037338e+07     42.000000  6.159000e+05      0.000000   
+         max    1.693440e+07  1.390780e+07   4862.000000  1.451520e+07      6.000000   
+         
+                      Var181  
+         count  44991.000000  
+         mean       0.611456  
+         std        2.495681  
+         min        0.000000  
+         25\%        0.000000  
+         50\%        0.000000  
+         75\%        0.000000  
+         max       49.000000  
+         
+         [8 rows x 38 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{float\PYZus{}columns} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{select\PYZus{}dtypes}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{float\PYZus{}columns}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Var6', 'Var7', 'Var13', 'Var21', 'Var22', 'Var24', 'Var25', 'Var28', 'Var35', 'Var38', 'Var44', 'Var57', 'Var65', 'Var73', 'Var74', 'Var76', 'Var78', 'Var81', 'Var83', 'Var85', 'Var109', 'Var112', 'Var113', 'Var119', 'Var123', 'Var125', 'Var132', 'Var133', 'Var134', 'Var140', 'Var143', 'Var144', 'Var149', 'Var153', 'Var160', 'Var163', 'Var173', 'Var181']
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{}check the standard deviation of all numeirc columns}
+         \PY{n}{train}\PY{p}{[}\PY{n}{float\PYZus{}columns}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} Var6      2.685694e+03
+         Var7      6.326053e+00
+         Var13     2.794955e+03
+         Var21     5.655601e+02
+         Var22     7.044900e+02
+         Var24     9.928819e+00
+         Var25     2.143183e+02
+         Var28     9.852024e+01
+         Var35     2.996007e+00
+         Var38     3.010076e+06
+         Var44     1.629344e+00
+         Var57     2.025882e+00
+         Var65     1.013444e+01
+         Var73     5.285917e+01
+         Var74     7.667120e+02
+         Var76     1.853693e+06
+         Var78     2.135359e+00
+         Var81     1.062721e+05
+         Var83     8.812946e+01
+         Var85     2.062048e+01
+         Var109    1.412492e+02
+         Var112    1.576377e+02
+         Var113    7.613730e+05
+         Var119    2.165433e+03
+         Var123    2.215513e+02
+         Var125    9.012838e+04
+         Var132    9.994878e+00
+         Var133    2.438600e+06
+         Var134    6.043415e+05
+         Var140    3.990511e+03
+         Var143    6.430608e-01
+         Var144    1.172029e+01
+         Var149    6.568946e+05
+         Var153    4.348926e+06
+         Var160    9.949715e+01
+         Var163    8.488638e+05
+         Var173    1.325030e-01
+         Var181    2.495681e+00
+         dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} proportion of missing entries in each float columns}
+         \PY{n}{train}\PY{p}{[}\PY{n}{float\PYZus{}columns}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{n}{train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} Var6      0.11058
+         Var7      0.11078
+         Var13     0.11078
+         Var21     0.11058
+         Var22     0.10018
+         Var24     0.14460
+         Var25     0.10018
+         Var28     0.10022
+         Var35     0.10018
+         Var38     0.10018
+         Var44     0.10018
+         Var57     0.00000
+         Var65     0.11078
+         Var73     0.00000
+         Var74     0.11078
+         Var76     0.10018
+         Var78     0.10018
+         Var81     0.11058
+         Var83     0.10018
+         Var85     0.10018
+         Var109    0.14460
+         Var112    0.10018
+         Var113    0.00000
+         Var119    0.11058
+         Var123    0.10018
+         Var125    0.11078
+         Var132    0.10018
+         Var133    0.10018
+         Var134    0.10018
+         Var140    0.11078
+         Var143    0.10018
+         Var144    0.11058
+         Var149    0.14460
+         Var153    0.10018
+         Var160    0.10018
+         Var163    0.10018
+         Var173    0.10018
+         Var181    0.10018
+         dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{} filling missing values}
+         \PY{n}{float\PYZus{}mean} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{float\PYZus{}columns}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{k}{for} \PY{n}{column} \PY{o+ow}{in} \PY{n}{float\PYZus{}columns}\PY{p}{:}
+             \PY{n}{missing\PYZus{}rows} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}
+             \PY{k}{if} \PY{n}{missing\PYZus{}rows}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{train}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{n}{missing\PYZus{}rows}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{column}\PY{p}{]} \PY{o}{=} \PY{n}{float\PYZus{}mean}\PY{p}{[}\PY{n}{column}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/suryavamsi/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:6: DeprecationWarning: 
+.ix is deprecated. Please use
+.loc for label based indexing or
+.iloc for positional indexing
+
+See the documentation here:
+http://pandas.pydata.org/pandas-docs/stable/indexing.html\#ix-indexer-is-deprecated
+  
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} all null values filled}
+         \PY{n}{train}\PY{p}{[}\PY{n}{float\PYZus{}columns}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{n}{train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} Var6      0.0
+         Var7      0.0
+         Var13     0.0
+         Var21     0.0
+         Var22     0.0
+         Var24     0.0
+         Var25     0.0
+         Var28     0.0
+         Var35     0.0
+         Var38     0.0
+         Var44     0.0
+         Var57     0.0
+         Var65     0.0
+         Var73     0.0
+         Var74     0.0
+         Var76     0.0
+         Var78     0.0
+         Var81     0.0
+         Var83     0.0
+         Var85     0.0
+         Var109    0.0
+         Var112    0.0
+         Var113    0.0
+         Var119    0.0
+         Var123    0.0
+         Var125    0.0
+         Var132    0.0
+         Var133    0.0
+         Var134    0.0
+         Var140    0.0
+         Var143    0.0
+         Var144    0.0
+         Var149    0.0
+         Var153    0.0
+         Var160    0.0
+         Var163    0.0
+         Var173    0.0
+         Var181    0.0
+         dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} Getting count of categories in each categorical column}
+         \PY{n}{categories\PYZus{}number\PYZus{}cols} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{category\PYZus{}columns}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{col}\PY{p}{:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{col}\PY{o}{.}\PY{n}{cat}\PY{o}{.}\PY{n}{categories}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{categories\PYZus{}number\PYZus{}cols}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Var192      361
+Var193       51
+Var195       23
+Var196        4
+Var197      225
+Var198     4291
+Var199     5073
+Var202     5713
+Var203        5
+Var204      100
+Var205        3
+Var206       21
+Var207       14
+Var208        2
+Var210        6
+Var211        2
+Var212       81
+Var216     2016
+Var217    13990
+Var218        2
+Var219       22
+Var220     4291
+Var221        7
+Var222     4291
+Var223        4
+Var226       23
+Var227        7
+Var228       30
+dtype: int64
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{} Neglecting all with more than 500 categories}
+         \PY{n}{collapsed\PYZus{}categories} \PY{o}{=} \PY{n}{category\PYZus{}columns}
+         \PY{n}{category\PYZus{}cols} \PY{o}{=} \PY{n}{categories\PYZus{}number\PYZus{}cols}\PY{p}{[}\PY{n}{categories\PYZus{}number\PYZus{}cols} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{500}\PY{p}{]}\PY{o}{.}\PY{n}{index}
+         \PY{n}{category\PYZus{}cols}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} Index(['Var192', 'Var193', 'Var195', 'Var196', 'Var197', 'Var203', 'Var204',
+                'Var205', 'Var206', 'Var207', 'Var208', 'Var210', 'Var211', 'Var212',
+                'Var218', 'Var219', 'Var221', 'Var223', 'Var226', 'Var227', 'Var228'],
+               dtype='object')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{c+c1}{\PYZsh{} Handling categorical data}
+         \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{category\PYZus{}cols}\PY{p}{:}
+             \PY{n}{missing\PYZus{}rows} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}
+             
+             \PY{k}{if} \PY{n}{missing\PYZus{}rows}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{train}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{cat}\PY{o}{.}\PY{n}{add\PYZus{}categories}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MISSING}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+                 \PY{n}{train}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{n}{missing\PYZus{}rows}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MISSING}\PY{l+s+s1}{\PYZsq{}}
+             
+             \PY{n}{temp} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+             
+             \PY{k}{for} \PY{n}{category} \PY{o+ow}{in} \PY{n}{temp}\PY{o}{.}\PY{n}{cat}\PY{o}{.}\PY{n}{categories}\PY{p}{:}
+                 \PY{n}{matching\PYZus{}cat\PYZus{}rows} \PY{o}{=} \PY{n}{temp} \PY{o}{==} \PY{n}{category}
+                 
+                 \PY{k}{if} \PY{n}{matching\PYZus{}cat\PYZus{}rows}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.05}\PY{o}{*}\PY{n}{train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{:}
+                     \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OTHER}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{train}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{cat}\PY{o}{.}\PY{n}{categories}\PY{p}{:}
+                         \PY{n}{train}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{cat}\PY{o}{.}\PY{n}{add\PYZus{}categories}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OTHER}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+                     \PY{n}{train}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{n}{matching\PYZus{}cat\PYZus{}rows}\PY{p}{,} \PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OTHER}\PY{l+s+s1}{\PYZsq{}}
+                     \PY{n}{train}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{cat}\PY{o}{.}\PY{n}{remove\PYZus{}categories}\PY{p}{(}\PY{n}{category}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{categories\PYZus{}number\PYZus{}cols} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{category\PYZus{}columns}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{col}\PY{p}{:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{col}\PY{o}{.}\PY{n}{cat}\PY{o}{.}\PY{n}{categories}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{categories\PYZus{}number\PYZus{}cols}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Var192        1
+Var193        3
+Var195        2
+Var196        2
+Var197        6
+Var198     4291
+Var199     5073
+Var202     5713
+Var203        3
+Var204        1
+Var205        4
+Var206        7
+Var207        4
+Var208        3
+Var210        2
+Var211        2
+Var212        4
+Var216     2016
+Var217    13990
+Var218        3
+Var219        3
+Var220     4291
+Var221        4
+Var222     4291
+Var223        4
+Var226        8
+Var227        4
+Var228        4
+dtype: int64
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{remove\PYZus{}columns} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{category\PYZus{}columns}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n+nb}{set}\PY{p}{(}\PY{n}{category\PYZus{}cols}\PY{p}{)}\PY{p}{)}
+         \PY{n}{remove\PYZus{}columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:} ['Var217', 'Var222', 'Var202', 'Var199', 'Var220', 'Var198', 'Var216']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{train}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns} \PY{o}{=} \PY{n}{remove\PYZus{}columns}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{train}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:}           Var6  Var7   Var13        Var21   Var22      Var24  Var25   Var28  \textbackslash{}
+         0  1526.000000   7.0   184.0   464.000000   580.0  14.000000  128.0  166.56   
+         1   525.000000   0.0     0.0   168.000000   210.0   2.000000   24.0  353.52   
+         2  5236.000000   7.0   904.0  1212.000000  1515.0  26.000000  816.0  220.08   
+         3  1326.437116   0.0     0.0   234.518225     0.0   4.507926    0.0   22.08   
+         4  1029.000000   7.0  3216.0    64.000000    80.0   4.000000   64.0  200.00   
+         
+            Var35      Var38      {\ldots}        Var210  Var211         Var212  Var218  \textbackslash{}
+         0    0.0     3570.0      {\ldots}          uKAI    L84s  XfqtO3UdzaXh\_    cJvF   
+         1    0.0  4764966.0      {\ldots}          uKAI    L84s        NhsEn4L   OTHER   
+         2    0.0  5883894.0      {\ldots}          uKAI    L84s          OTHER    UYBR   
+         3    0.0        0.0      {\ldots}          uKAI    Mtgm        NhsEn4L    UYBR   
+         4    0.0        0.0      {\ldots}          uKAI    L84s  XfqtO3UdzaXh\_    UYBR   
+         
+            Var219  Var221      Var223  Var226  Var227         Var228  
+         0    FzaX    oslk  jySVZNlOJy   OTHER    RAYp  F2FyR07IdsN7I  
+         1    FzaX    oslk  LM8l689qOp    fKCe    RAYp  F2FyR07IdsN7I  
+         2    FzaX   OTHER  jySVZNlOJy    Qu4f   OTHER  ib5G6X1eUxUn6  
+         3    FzaX    oslk  LM8l689qOp    FSa2    RAYp  F2FyR07IdsN7I  
+         4    FzaX    oslk  LM8l689qOp    FSa2    RAYp  F2FyR07IdsN7I  
+         
+         [5 rows x 59 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{category\PYZus{}columns} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{select\PYZus{}dtypes}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{category}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+         \PY{n}{categories\PYZus{}number\PYZus{}cols} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{category\PYZus{}columns}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{col}\PY{p}{:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{col}\PY{o}{.}\PY{n}{cat}\PY{o}{.}\PY{n}{categories}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{categories\PYZus{}number\PYZus{}cols}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Var192    1
+Var193    3
+Var195    2
+Var196    2
+Var197    6
+Var203    3
+Var204    1
+Var205    4
+Var206    7
+Var207    4
+Var208    3
+Var210    2
+Var211    2
+Var212    4
+Var218    3
+Var219    3
+Var221    4
+Var223    4
+Var226    8
+Var227    4
+Var228    4
+dtype: int64
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{remove\PYZus{}cat\PYZus{}columns} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{column} \PY{o+ow}{in} \PY{n+nb}{list}\PY{p}{(}\PY{n}{category\PYZus{}columns}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{cat}\PY{o}{.}\PY{n}{categories}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{1} \PY{o+ow}{or} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{cat}\PY{o}{.}\PY{n}{categories}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{n+nb}{set}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MISSING}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OTHER}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{remove\PYZus{}cat\PYZus{}columns}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{column}\PY{p}{)}
+         \PY{n}{remove\PYZus{}cat\PYZus{}columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:} ['Var192', 'Var195', 'Var196', 'Var204', 'Var210', 'Var219']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{train}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns} \PY{o}{=} \PY{n}{remove\PYZus{}cat\PYZus{}columns}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{train}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:}           Var6  Var7   Var13        Var21   Var22      Var24  Var25   Var28  \textbackslash{}
+         0  1526.000000   7.0   184.0   464.000000   580.0  14.000000  128.0  166.56   
+         1   525.000000   0.0     0.0   168.000000   210.0   2.000000   24.0  353.52   
+         2  5236.000000   7.0   904.0  1212.000000  1515.0  26.000000  816.0  220.08   
+         3  1326.437116   0.0     0.0   234.518225     0.0   4.507926    0.0   22.08   
+         4  1029.000000   7.0  3216.0    64.000000    80.0   4.000000   64.0  200.00   
+         
+            Var35      Var38      {\ldots}                           Var207  Var208  Var211  \textbackslash{}
+         0    0.0     3570.0      {\ldots}                       me75fM6ugJ    kIsH    L84s   
+         1    0.0  4764966.0      {\ldots}                       me75fM6ugJ    kIsH    L84s   
+         2    0.0  5883894.0      {\ldots}        DHn\_WUyBhW\_whjA88g9bvA64\_    kIsH    L84s   
+         3    0.0        0.0      {\ldots}                       me75fM6ugJ    kIsH    Mtgm   
+         4    0.0        0.0      {\ldots}                       me75fM6ugJ    kIsH    L84s   
+         
+                   Var212  Var218  Var221      Var223  Var226  Var227         Var228  
+         0  XfqtO3UdzaXh\_    cJvF    oslk  jySVZNlOJy   OTHER    RAYp  F2FyR07IdsN7I  
+         1        NhsEn4L   OTHER    oslk  LM8l689qOp    fKCe    RAYp  F2FyR07IdsN7I  
+         2          OTHER    UYBR   OTHER  jySVZNlOJy    Qu4f   OTHER  ib5G6X1eUxUn6  
+         3        NhsEn4L    UYBR    oslk  LM8l689qOp    FSa2    RAYp  F2FyR07IdsN7I  
+         4  XfqtO3UdzaXh\_    UYBR    oslk  LM8l689qOp    FSa2    RAYp  F2FyR07IdsN7I  
+         
+         [5 rows x 53 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{train\PYZus{}columns\PYZus{}final} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{train} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{train}\PY{p}{,}\PY{n}{prefix\PYZus{}sep} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{train}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:}           Var6  Var7   Var13        Var21   Var22      Var24  Var25   Var28  \textbackslash{}
+         0  1526.000000   7.0   184.0   464.000000   580.0  14.000000  128.0  166.56   
+         1   525.000000   0.0     0.0   168.000000   210.0   2.000000   24.0  353.52   
+         2  5236.000000   7.0   904.0  1212.000000  1515.0  26.000000  816.0  220.08   
+         3  1326.437116   0.0     0.0   234.518225     0.0   4.507926    0.0   22.08   
+         4  1029.000000   7.0  3216.0    64.000000    80.0   4.000000   64.0  200.00   
+         
+            Var35      Var38      {\ldots}       Var226\_szEZ  Var226\_OTHER  Var227\_6fzt  \textbackslash{}
+         0    0.0     3570.0      {\ldots}                 0             1            0   
+         1    0.0  4764966.0      {\ldots}                 0             0            0   
+         2    0.0  5883894.0      {\ldots}                 0             0            0   
+         3    0.0        0.0      {\ldots}                 0             0            0   
+         4    0.0        0.0      {\ldots}                 0             0            0   
+         
+            Var227\_RAYp  Var227\_ZI9m  Var227\_OTHER  Var228\_55YFVY9  \textbackslash{}
+         0            1            0             0               0   
+         1            1            0             0               0   
+         2            0            0             1               0   
+         3            1            0             0               0   
+         4            1            0             0               0   
+         
+            Var228\_F2FyR07IdsN7I  Var228\_ib5G6X1eUxUn6  Var228\_OTHER  
+         0                     1                     0             0  
+         1                     1                     0             0  
+         2                     0                     1             0  
+         3                     1                     0             0  
+         4                     1                     0             0  
+         
+         [5 rows x 101 columns]
+\end{Verbatim}
+            
+    \section{Tuning Test data}\label{tuning-test-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{test} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}table}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{orange\PYZus{}small\PYZus{}test.data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{test}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}41}]:}    Var1  Var2  Var3  Var4  Var5    Var6  Var7  Var8  Var9  Var10   {\ldots}    \textbackslash{}
+         0   NaN   NaN   NaN   NaN   NaN  1225.0   7.0   NaN   NaN    NaN   {\ldots}     
+         1   NaN   NaN   NaN   NaN   NaN   259.0   0.0   NaN   NaN    NaN   {\ldots}     
+         2   NaN   NaN   NaN   NaN   NaN   861.0  14.0   NaN   NaN    NaN   {\ldots}     
+         3   NaN   NaN   NaN   NaN   NaN  1568.0   7.0   NaN   NaN    NaN   {\ldots}     
+         4   NaN   NaN   NaN   NaN   NaN  1197.0   7.0   NaN   NaN    NaN   {\ldots}     
+         
+             Var221   Var222      Var223  Var224  Var225  Var226  Var227  \textbackslash{}
+         0  Al6ZaUT  P6pu4Vl  LM8l689qOp     NaN    ELof    7P5s    ZI9m   
+         1     oslk  S46Rt72  LM8l689qOp     NaN     NaN    Qu4f    RAYp   
+         2     oslk  CcdTy9x  LM8l689qOp     NaN     NaN    7aLG    RAYp   
+         3     oslk  Q53Rkup  LM8l689qOp     NaN    kG3k    7P5s    RAYp   
+         4  Al6ZaUT  WfsWw2A  LM8l689qOp     NaN    ELof    5Acm    ZI9m   
+         
+                         Var228  Var229  Var230  
+         0     R4y5gQQWY8OodqDV     NaN     NaN  
+         1        F2FyR07IdsN7I     NaN     NaN  
+         2        F2FyR07IdsN7I     NaN     NaN  
+         3  TCU50\_Yjmm6GIBZ0lL\_    am7c     NaN  
+         4           iyHGyLCEkQ    am7c     NaN  
+         
+         [5 rows x 230 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{c+c1}{\PYZsh{} Considering only those final columns in train data }
+         \PY{n}{test} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{n}{train\PYZus{}columns\PYZus{}final}\PY{p}{]}
+         \PY{n}{test}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:}      Var6  Var7   Var13  Var21  Var22  Var24  Var25   Var28  Var35  \textbackslash{}
+         0  1225.0   7.0   100.0  156.0  195.0    0.0   72.0  166.56    0.0   
+         1   259.0   0.0     0.0  192.0  240.0    0.0   40.0  300.32    5.0   
+         2   861.0  14.0   236.0   32.0   40.0    0.0    8.0  186.64    0.0   
+         3  1568.0   7.0  1232.0  448.0  560.0    4.0   88.0  166.56    0.0   
+         4  1197.0   7.0   204.0  100.0  125.0    8.0   40.0  133.12    0.0   
+         
+                 Var38         {\ldots}                        Var207  Var208  Var211  \textbackslash{}
+         0   4259232.0         {\ldots}           7M47J5GA0pTYIFxg5uy    kIsH    L84s   
+         1   4859550.0         {\ldots}                    me75fM6ugJ    kIsH    L84s   
+         2  10038840.0         {\ldots}                    me75fM6ugJ    kIsH    L84s   
+         3    116760.0         {\ldots}                    me75fM6ugJ    kIsH    L84s   
+         4    257772.0         {\ldots}           7M47J5GA0pTYIFxg5uy    kIsH    L84s   
+         
+                   Var212  Var218   Var221      Var223  Var226  Var227  \textbackslash{}
+         0  H4p93\_uThXwSG    cJvF  Al6ZaUT  LM8l689qOp    7P5s    ZI9m   
+         1        NhsEn4L    cJvF     oslk  LM8l689qOp    Qu4f    RAYp   
+         2        NhsEn4L    cJvF     oslk  LM8l689qOp    7aLG    RAYp   
+         3  XfqtO3UdzaXh\_    UYBR     oslk  LM8l689qOp    7P5s    RAYp   
+         4  H4p93\_uThXwSG    cJvF  Al6ZaUT  LM8l689qOp    5Acm    ZI9m   
+         
+                         Var228  
+         0     R4y5gQQWY8OodqDV  
+         1        F2FyR07IdsN7I  
+         2        F2FyR07IdsN7I  
+         3  TCU50\_Yjmm6GIBZ0lL\_  
+         4           iyHGyLCEkQ  
+         
+         [5 rows x 53 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{test}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}43}]:} (50000, 53)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{test}\PY{p}{[}\PY{n}{float\PYZus{}columns}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:} Var6      4.782992e+03
+         Var7      6.337791e+00
+         Var13     2.806325e+03
+         Var21     9.541252e+02
+         Var22     1.197880e+03
+         Var24     1.586527e+01
+         Var25     3.401678e+02
+         Var28     9.489908e+01
+         Var35     3.000392e+00
+         Var38     2.985583e+06
+         Var44     1.468685e+00
+         Var57     2.013811e+00
+         Var65     1.015527e+01
+         Var73     5.272626e+01
+         Var74     4.903856e+02
+         Var76     1.851656e+06
+         Var78     2.078528e+00
+         Var81     1.057222e+05
+         Var83     1.475177e+02
+         Var85     3.254076e+01
+         Var109    2.502560e+02
+         Var112    2.531264e+02
+         Var113    7.630832e+05
+         Var119    5.211730e+03
+         Var123    4.009458e+02
+         Var125    8.823986e+04
+         Var132    9.770001e+00
+         Var133    2.452384e+06
+         Var134    5.987738e+05
+         Var140    3.096650e+03
+         Var143    6.329806e-01
+         Var144    1.177087e+01
+         Var149    6.508057e+05
+         Var153    4.333460e+06
+         Var160    1.381485e+02
+         Var163    8.464257e+05
+         Var173    1.232750e-01
+         Var181    2.397115e+00
+         dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{c+c1}{\PYZsh{} proportion of missing entries in each float columns}
+         \PY{n}{test}\PY{p}{[}\PY{n}{float\PYZus{}columns}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{n}{test}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}45}]:} Var6      0.11218
+         Var7      0.11246
+         Var13     0.11246
+         Var21     0.11218
+         Var22     0.10232
+         Var24     0.14478
+         Var25     0.10232
+         Var28     0.10238
+         Var35     0.10232
+         Var38     0.10232
+         Var44     0.10232
+         Var57     0.00000
+         Var65     0.11246
+         Var73     0.00000
+         Var74     0.11246
+         Var76     0.10232
+         Var78     0.10232
+         Var81     0.11218
+         Var83     0.10232
+         Var85     0.10232
+         Var109    0.14478
+         Var112    0.10232
+         Var113    0.00000
+         Var119    0.11218
+         Var123    0.10232
+         Var125    0.11246
+         Var132    0.10232
+         Var133    0.10232
+         Var134    0.10232
+         Var140    0.11246
+         Var143    0.10232
+         Var144    0.11218
+         Var149    0.14478
+         Var153    0.10232
+         Var160    0.10232
+         Var163    0.10232
+         Var173    0.10232
+         Var181    0.10232
+         dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{c+c1}{\PYZsh{} filling missing values}
+         \PY{n}{float\PYZus{}mean} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{n}{float\PYZus{}columns}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{k}{for} \PY{n}{column} \PY{o+ow}{in} \PY{n}{float\PYZus{}columns}\PY{p}{:}
+             \PY{n}{missing\PYZus{}rows} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}
+             \PY{k}{if} \PY{n}{missing\PYZus{}rows}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{test}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{n}{missing\PYZus{}rows}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{column}\PY{p}{]} \PY{o}{=} \PY{n}{float\PYZus{}mean}\PY{p}{[}\PY{n}{column}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/suryavamsi/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:6: DeprecationWarning: 
+.ix is deprecated. Please use
+.loc for label based indexing or
+.iloc for positional indexing
+
+See the documentation here:
+http://pandas.pydata.org/pandas-docs/stable/indexing.html\#ix-indexer-is-deprecated
+  
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{test}\PY{p}{[}\PY{n}{float\PYZus{}columns}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{n}{test}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:} Var6      0.0
+         Var7      0.0
+         Var13     0.0
+         Var21     0.0
+         Var22     0.0
+         Var24     0.0
+         Var25     0.0
+         Var28     0.0
+         Var35     0.0
+         Var38     0.0
+         Var44     0.0
+         Var57     0.0
+         Var65     0.0
+         Var73     0.0
+         Var74     0.0
+         Var76     0.0
+         Var78     0.0
+         Var81     0.0
+         Var83     0.0
+         Var85     0.0
+         Var109    0.0
+         Var112    0.0
+         Var113    0.0
+         Var119    0.0
+         Var123    0.0
+         Var125    0.0
+         Var132    0.0
+         Var133    0.0
+         Var134    0.0
+         Var140    0.0
+         Var143    0.0
+         Var144    0.0
+         Var149    0.0
+         Var153    0.0
+         Var160    0.0
+         Var163    0.0
+         Var173    0.0
+         Var181    0.0
+         dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{c+c1}{\PYZsh{} Getting count of categories in each categorical column}
+         \PY{n}{category\PYZus{}columns} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{test}\PY{o}{.}\PY{n}{select\PYZus{}dtypes}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{object}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+         \PY{k}{for} \PY{n}{column} \PY{o+ow}{in} \PY{n}{category\PYZus{}columns}\PY{p}{:}
+             \PY{n}{test}\PY{p}{[}\PY{n}{column}\PY{p}{]} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{category}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{categories\PYZus{}number\PYZus{}cols} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{n}{category\PYZus{}columns}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{col}\PY{p}{:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{col}\PY{o}{.}\PY{n}{cat}\PY{o}{.}\PY{n}{categories}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{categories\PYZus{}number\PYZus{}cols}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Var193     47
+Var197    232
+Var203      4
+Var205      3
+Var206     22
+Var207     14
+Var208      2
+Var211      2
+Var212     81
+Var218      2
+Var221      7
+Var223      4
+Var226     25
+Var227      7
+Var228     30
+dtype: int64
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Var226}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fKCe}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}49}]:} 2429
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{collapsed\PYZus{}categories} \PY{o}{=} \PY{n}{category\PYZus{}columns}
+         \PY{n}{category\PYZus{}cols} \PY{o}{=} \PY{n}{categories\PYZus{}number\PYZus{}cols}\PY{p}{[}\PY{n}{categories\PYZus{}number\PYZus{}cols} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{500}\PY{p}{]}\PY{o}{.}\PY{n}{index}
+         \PY{c+c1}{\PYZsh{} Handling categorical data}
+         \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{category\PYZus{}cols}\PY{p}{:}
+             \PY{n}{missing\PYZus{}rows} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}
+             
+             \PY{k}{if} \PY{n}{missing\PYZus{}rows}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{test}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{cat}\PY{o}{.}\PY{n}{add\PYZus{}categories}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MISSING}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+                 \PY{n}{test}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{n}{missing\PYZus{}rows}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MISSING}\PY{l+s+s1}{\PYZsq{}}
+             
+             \PY{n}{temp} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+             
+             \PY{k}{for} \PY{n}{category} \PY{o+ow}{in} \PY{n}{temp}\PY{o}{.}\PY{n}{cat}\PY{o}{.}\PY{n}{categories}\PY{p}{:}
+                 \PY{n}{matching\PYZus{}cat\PYZus{}rows} \PY{o}{=} \PY{n}{temp} \PY{o}{==} \PY{n}{category}
+                 
+                 \PY{k}{if} \PY{n}{matching\PYZus{}cat\PYZus{}rows}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.048}\PY{o}{*}\PY{n}{test}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{:}
+                     \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OTHER}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{test}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{cat}\PY{o}{.}\PY{n}{categories}\PY{p}{:}
+                         \PY{n}{test}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{cat}\PY{o}{.}\PY{n}{add\PYZus{}categories}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OTHER}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+                     \PY{n}{test}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{n}{matching\PYZus{}cat\PYZus{}rows}\PY{p}{,} \PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OTHER}\PY{l+s+s1}{\PYZsq{}}
+                     \PY{n}{test}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{cat}\PY{o}{.}\PY{n}{remove\PYZus{}categories}\PY{p}{(}\PY{n}{category}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{n}{categories\PYZus{}number\PYZus{}cols} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{n}{category\PYZus{}columns}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{col}\PY{p}{:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{col}\PY{o}{.}\PY{n}{cat}\PY{o}{.}\PY{n}{categories}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{categories\PYZus{}number\PYZus{}cols}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Var193    3
+Var197    6
+Var203    3
+Var205    4
+Var206    7
+Var207    4
+Var208    3
+Var211    2
+Var212    4
+Var218    3
+Var221    4
+Var223    4
+Var226    8
+Var227    4
+Var228    4
+dtype: int64
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Var226}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{cat}\PY{o}{.}\PY{n}{categories}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}51}]:} Index(['7P5s', 'Aoh3', 'FSa2', 'Qu4f', 'WqMG', 'fKCe', 'szEZ', 'OTHER'], dtype='object')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{remove\PYZus{}cat\PYZus{}columns} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{column} \PY{o+ow}{in} \PY{n+nb}{list}\PY{p}{(}\PY{n}{category\PYZus{}columns}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{cat}\PY{o}{.}\PY{n}{categories}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{1} \PY{o+ow}{or} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{cat}\PY{o}{.}\PY{n}{categories}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{n+nb}{set}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MISSING}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OTHER}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{remove\PYZus{}cat\PYZus{}columns}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{column}\PY{p}{)}
+         \PY{n}{remove\PYZus{}cat\PYZus{}columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}52}]:} []
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n}{test}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}53}]:}      Var6  Var7   Var13  Var21  Var22  Var24  Var25   Var28  Var35  \textbackslash{}
+         0  1225.0   7.0   100.0  156.0  195.0    0.0   72.0  166.56    0.0   
+         1   259.0   0.0     0.0  192.0  240.0    0.0   40.0  300.32    5.0   
+         2   861.0  14.0   236.0   32.0   40.0    0.0    8.0  186.64    0.0   
+         3  1568.0   7.0  1232.0  448.0  560.0    4.0   88.0  166.56    0.0   
+         4  1197.0   7.0   204.0  100.0  125.0    8.0   40.0  133.12    0.0   
+         
+                 Var38      {\ldots}                     Var207  Var208  Var211  \textbackslash{}
+         0   4259232.0      {\ldots}        7M47J5GA0pTYIFxg5uy    kIsH    L84s   
+         1   4859550.0      {\ldots}                 me75fM6ugJ    kIsH    L84s   
+         2  10038840.0      {\ldots}                 me75fM6ugJ    kIsH    L84s   
+         3    116760.0      {\ldots}                 me75fM6ugJ    kIsH    L84s   
+         4    257772.0      {\ldots}        7M47J5GA0pTYIFxg5uy    kIsH    L84s   
+         
+                   Var212  Var218  Var221      Var223  Var226  Var227         Var228  
+         0          OTHER    cJvF   OTHER  LM8l689qOp    7P5s    ZI9m          OTHER  
+         1        NhsEn4L    cJvF    oslk  LM8l689qOp    Qu4f    RAYp  F2FyR07IdsN7I  
+         2        NhsEn4L    cJvF    oslk  LM8l689qOp   OTHER    RAYp  F2FyR07IdsN7I  
+         3  XfqtO3UdzaXh\_    UYBR    oslk  LM8l689qOp    7P5s    RAYp          OTHER  
+         4          OTHER    cJvF   OTHER  LM8l689qOp   OTHER    ZI9m          OTHER  
+         
+         [5 rows x 53 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{test} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{test}\PY{p}{,}\PY{n}{prefix\PYZus{}sep} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{n}{test}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}55}]:}      Var6  Var7   Var13  Var21  Var22  Var24  Var25   Var28  Var35  \textbackslash{}
+         0  1225.0   7.0   100.0  156.0  195.0    0.0   72.0  166.56    0.0   
+         1   259.0   0.0     0.0  192.0  240.0    0.0   40.0  300.32    5.0   
+         2   861.0  14.0   236.0   32.0   40.0    0.0    8.0  186.64    0.0   
+         3  1568.0   7.0  1232.0  448.0  560.0    4.0   88.0  166.56    0.0   
+         4  1197.0   7.0   204.0  100.0  125.0    8.0   40.0  133.12    0.0   
+         
+                 Var38      {\ldots}       Var226\_szEZ  Var226\_OTHER  Var227\_6fzt  \textbackslash{}
+         0   4259232.0      {\ldots}                 0             0            0   
+         1   4859550.0      {\ldots}                 0             0            0   
+         2  10038840.0      {\ldots}                 0             1            0   
+         3    116760.0      {\ldots}                 0             0            0   
+         4    257772.0      {\ldots}                 0             1            0   
+         
+            Var227\_RAYp  Var227\_ZI9m  Var227\_OTHER  Var228\_55YFVY9  \textbackslash{}
+         0            0            1             0               0   
+         1            1            0             0               0   
+         2            1            0             0               0   
+         3            1            0             0               0   
+         4            0            1             0               0   
+         
+            Var228\_F2FyR07IdsN7I  Var228\_ib5G6X1eUxUn6  Var228\_OTHER  
+         0                     0                     0             1  
+         1                     1                     0             0  
+         2                     1                     0             0  
+         3                     0                     0             1  
+         4                     0                     0             1  
+         
+         [5 rows x 101 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{columns}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n+nb}{set}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{test}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}56}]:} []
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{c+c1}{\PYZsh{} Now the list of columns in train and test are similar. So, now we can train our model based on these.}
+\end{Verbatim}
+
+
+    \subsection{Validation split}\label{validation-split}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{k+kn}{from} \PY{n+nn}{random} \PY{k}{import} \PY{n}{seed}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cross\PYZus{}validation} \PY{k}{import} \PY{n}{StratifiedShuffleSplit}
+         
+         \PY{n}{RANDOM\PYZus{}SEED} \PY{o}{=} \PY{l+m+mi}{24}
+         \PY{n}{seed}\PY{p}{(}\PY{n}{RANDOM\PYZus{}SEED}\PY{p}{)}
+         
+         \PY{n}{test\PYZus{}proportion} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{6}
+         \PY{n}{split} \PY{o}{=} \PY{n}{StratifiedShuffleSplit}\PY{p}{(}
+             \PY{n}{y}\PY{o}{=}\PY{n}{appetency}\PY{p}{,}
+             \PY{n}{n\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}
+             \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{n}{test\PYZus{}proportion}\PY{p}{,}
+             \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{RANDOM\PYZus{}SEED}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{train\PYZus{}valid\PYZus{}indices}\PY{p}{,} \PY{n}{test\PYZus{}indices} \PY{o+ow}{in} \PY{n}{split}\PY{p}{:}
+             \PY{n}{X\PYZus{}train\PYZus{}valid}\PY{p}{,} \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{train\PYZus{}valid\PYZus{}indices}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{train}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{test\PYZus{}indices}\PY{p}{,} \PY{p}{:}\PY{p}{]}
+             \PY{n}{appetency\PYZus{}train\PYZus{}valid}\PY{p}{,} \PY{n}{appetency\PYZus{}test} \PY{o}{=} \PY{n}{appetency}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{train\PYZus{}valid\PYZus{}indices}\PY{p}{]}\PY{p}{,} \PY{n}{appetency}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{test\PYZus{}indices}\PY{p}{]}
+             
+             
+         \PY{n}{valid\PYZus{}proportion\PYZus{}of\PYZus{}train\PYZus{}valid} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{25}
+         \PY{n}{split} \PY{o}{=} \PY{n}{StratifiedShuffleSplit}\PY{p}{(}
+             \PY{n}{y}\PY{o}{=}\PY{n}{appetency\PYZus{}train\PYZus{}valid}\PY{p}{,}
+             \PY{n}{n\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}
+             \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{n}{valid\PYZus{}proportion\PYZus{}of\PYZus{}train\PYZus{}valid}\PY{p}{,}
+             \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{RANDOM\PYZus{}SEED}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{train\PYZus{}indices}\PY{p}{,} \PY{n}{valid\PYZus{}indices} \PY{o+ow}{in} \PY{n}{split}\PY{p}{:}
+             \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}valid} \PY{o}{=} \PY{n}{X\PYZus{}train\PYZus{}valid}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{train\PYZus{}indices}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{X\PYZus{}train\PYZus{}valid}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{valid\PYZus{}indices}\PY{p}{,} \PY{p}{:}\PY{p}{]}
+             \PY{n}{appetency\PYZus{}train}\PY{p}{,} \PY{n}{appetency\PYZus{}valid} \PY{o}{=} \PY{n}{appetency\PYZus{}train\PYZus{}valid}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{train\PYZus{}indices}\PY{p}{]}\PY{p}{,} \PY{n}{appetency\PYZus{}train\PYZus{}valid}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{valid\PYZus{}indices}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{n}{appetency\PYZus{}train}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}61}]:}        0
+         7041  -1
+         49934 -1
+         49530 -1
+         45582 -1
+         43197 -1
+         6157  -1
+         286   -1
+         22786 -1
+         36167 -1
+         31157 -1
+         19250 -1
+         40269 -1
+         47495 -1
+         48733 -1
+         41976 -1
+         6644  -1
+         24023 -1
+         17574 -1
+         16449 -1
+         28868 -1
+         6100  -1
+         4311  -1
+         26433 -1
+         5666  -1
+         24695 -1
+         32542 -1
+         24464 -1
+         31548 -1
+         20654 -1
+         12349 -1
+         {\ldots}   ..
+         30365 -1
+         26582 -1
+         35743 -1
+         5461  -1
+         27237 -1
+         35037 -1
+         18237 -1
+         34106 -1
+         26934 -1
+         40792 -1
+         21832 -1
+         25354 -1
+         39466 -1
+         46961 -1
+         31891 -1
+         38442 -1
+         49108 -1
+         406   -1
+         41090 -1
+         34672 -1
+         37124 -1
+         29179 -1
+         4538  -1
+         48864 -1
+         27877 -1
+         41665 -1
+         27369 -1
+         19418 -1
+         40505 -1
+         2675  -1
+         
+         [15000 rows x 1 columns]
+\end{Verbatim}
+            
+    \section{Classification Model}\label{classification-model}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestClassifier}
+         
+         \PY{n}{clf} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}
+             \PY{n}{n\PYZus{}estimators} \PY{o}{=} \PY{l+m+mi}{1000}\PY{p}{,}
+             \PY{n}{criterion} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{entropy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{n}{min\PYZus{}samples\PYZus{}split} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{,}
+             \PY{n}{max\PYZus{}features} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{n}{random\PYZus{}state} \PY{o}{=} \PY{l+m+mi}{42}\PY{p}{,}
+             \PY{n}{n\PYZus{}jobs} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+         \PY{p}{)}
+         
+         \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{appetency\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/suryavamsi/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:12: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n\_samples,), for example using ravel().
+  if sys.path[0] == '':
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}62}]:} RandomForestClassifier(bootstrap=True, class\_weight=None, criterion='entropy',
+                     max\_depth=None, max\_features='log2', max\_leaf\_nodes=None,
+                     min\_impurity\_decrease=0.0, min\_impurity\_split=None,
+                     min\_samples\_leaf=1, min\_samples\_split=100,
+                     min\_weight\_fraction\_leaf=0.0, n\_estimators=1000, n\_jobs=-1,
+                     oob\_score=False, random\_state=42, verbose=0, warm\_start=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{n}{train\PYZus{}predicted} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}valid}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{accuracy\PYZus{}score}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy on validation data = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{appetency\PYZus{}valid}\PY{p}{,} \PY{n}{train\PYZus{}predicted}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accuracy on validation data =  0.9822
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{n}{test\PYZus{}predicted} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
